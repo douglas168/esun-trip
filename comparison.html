@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>玉山主峰登山團比較 2026</title>
+  <style>
+    :root {
+      --taichung: #2563eb;
+      --chiayi: #16a34a;
+      --both: #9333ea;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --text: #1e293b;
+      --muted: #64748b;
+      --warn: #f59e0b;
+      --good: #22c55e;
+      --bad: #ef4444;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, "Microsoft JhengHei", "微軟正黑體", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 24px 16px;
+    }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    /* Header */
+    .page-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .page-header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .page-header p {
+      color: var(--muted);
+      margin-top: 6px;
+      font-size: 0.9rem;
+    }
+
+    /* Legend */
+    .legend {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    .dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .dot-taichung { background: var(--taichung); }
+    .dot-chiayi   { background: var(--chiayi); }
+    .dot-both     { background: var(--both); }
+
+    /* Section title */
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 32px 0 14px;
+      padding-left: 10px;
+      border-left: 4px solid var(--taichung);
+      color: #0f172a;
+    }
+
+    /* Summary table */
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      margin-bottom: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    th {
+      background: #1e293b;
+      color: #fff;
+      padding: 10px 12px;
+      text-align: left;
+      white-space: nowrap;
+    }
+    td {
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background: #f1f5f9; }
+    tr:hover td { background: #e0f2fe; }
+
+    .tag {
+      display: inline-block;
+      border-radius: 4px;
+      padding: 2px 7px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .tag-tc { background: #dbeafe; color: var(--taichung); }
+    .tag-cy { background: #dcfce7; color: var(--chiayi); }
+    .tag-both { background: #f3e8ff; color: var(--both); }
+    .tag-2d1n { background: #fef3c7; color: #92400e; }
+    .tag-2d2n { background: #ffe4e6; color: #9f1239; }
+
+    .price-em { font-weight: 700; color: #0369a1; }
+    .note-sm { font-size: 0.78rem; color: var(--muted); }
+
+    /* Tour cards */
+    .cards { display: flex; flex-direction: column; gap: 24px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .card-header {
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .card-header-tc   { background: #eff6ff; }
+    .card-header-cy   { background: #f0fdf4; }
+    .card-header-both { background: #faf5ff; }
+
+    .card-title { font-size: 1.05rem; font-weight: 700; color: #0f172a; }
+    .card-provider { font-size: 0.85rem; color: var(--muted); margin-top: 2px; }
+    .card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+
+    .card-body { padding: 16px 20px; }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px 24px;
+    }
+    .field-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 2px;
+    }
+    .field-value { font-size: 0.88rem; }
+    .field-value.big-price {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #0369a1;
+    }
+
+    .include-list {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .include-item {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 0.78rem;
+    }
+    .include-item.yes { background: #dcfce7; border-color: #86efac; }
+    .include-item.no  { background: #fee2e2; border-color: #fca5a5; text-decoration: line-through; color: var(--muted); }
+
+    .meal-yes { color: #15803d; font-size: 0.78rem; display: block; }
+    .meal-no  { color: #94a3b8; font-size: 0.78rem; display: block; }
+
+    /* Date availability grid */
+    .avail-table { border-collapse: collapse; font-size: 0.78rem; min-width: 1000px; }
+    .avail-table th, .avail-table td {
+      padding: 5px 7px; text-align: center;
+      border: 1px solid var(--border); white-space: nowrap;
+    }
+    .avail-table thead th { background: #1e293b; color: #fff; font-size: 0.72rem; }
+    .avail-table th.avail-tour { text-align: left; min-width: 110px; background: #1e293b; }
+    .avail-table th.avail-month { background: #334155; letter-spacing: 0.04em; }
+    .avail-table tbody th.avail-tour {
+      background: #f8fafc; font-weight: 600; color: var(--text); text-align: left;
+    }
+    .avail-sub { font-weight: 400; color: var(--muted); font-size: 0.7rem; }
+    .avail-cell { font-size: 0.78rem; font-weight: 700; min-width: 52px; }
+    .avail-open    { background: #dcfce7; color: #15803d; }
+    .avail-tight   { background: #fce7f3; color: #9d174d; }
+    .avail-forming { background: #fef3c7; color: #92400e; }
+    .avail-lottery { background: #dbeafe; color: #1d4ed8; }
+    .avail-full    { background: #fee2e2; color: #9f1239; }
+    .avail-none    { background: #f8fafc; color: #cbd5e1; font-weight: 400; }
+    .avail-inquiry { background: #e0f2fe; color: #0369a1; font-size: 0.7rem; font-weight: 500; }
+    .avail-daily   { background: #dcfce7; color: #15803d; font-size: 0.7rem; font-weight: 500; }
+    .avail-draw    { background: #dbeafe; color: #1d4ed8; font-size: 0.7rem; font-weight: 500; }
+    .avail-legend {
+      display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 4px;
+    }
+    .avail-leg {
+      display: inline-block; border-radius: 4px; padding: 2px 9px;
+      font-size: 0.75rem; font-weight: 600; border: 1px solid transparent;
+    }
+    .avail-leg.avail-open    { background: #dcfce7; color: #15803d; border-color: #86efac; }
+    .avail-leg.avail-tight   { background: #fce7f3; color: #9d174d; border-color: #f9a8d4; }
+    .avail-leg.avail-forming { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
+    .avail-leg.avail-lottery { background: #dbeafe; color: #1d4ed8; border-color: #93c5fd; }
+    .avail-leg.avail-full    { background: #fee2e2; color: #9f1239; border-color: #fca5a5; }
+    .avail-leg.avail-none    { background: #f1f5f9; color: #94a3b8; border-color: #cbd5e1; }
+    .avail-leg.avail-inquiry { background: #e0f2fe; color: #0369a1; border-color: #7dd3fc; }
+    .avail-leg.avail-daily   { background: #dcfce7; color: #15803d; border-color: #86efac; }
+
+
+    /* Review section */
+
+    .rev-cell { vertical-align: top; min-width: 100px; }
+    .rev-score { display: block; font-size: 0.78rem; font-weight: 700; color: #0f172a; }
+    .rev-sub   { display: block; font-size: 0.73rem; color: var(--muted); }
+    .rev-sparse { color: #94a3b8; }
+    .review-ratings { display: flex; flex-wrap: wrap; gap: 5px; margin: 6px 0 8px; }
+    .review-badge {
+      display: inline-flex; align-items: center; gap: 3px;
+      border-radius: 5px; padding: 3px 9px; font-size: 0.76rem; font-weight: 600;
+      border: 1px solid transparent; white-space: nowrap;
+    }
+    .review-count { font-weight: 400; }
+    .review-badge-google { background: #fefce8; color: #713f12; border-color: #fde68a; }
+    .review-badge-fb     { background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; }
+    .review-badge-pinkoi { background: #fdf4ff; color: #7e22ce; border-color: #e9d5ff; }
+    .review-badge-trip   { background: #f0fdf4; color: #15803d; border-color: #bbf7d0; }
+    .review-badge-note   { background: #f8fafc; color: #475569; border-color: #cbd5e1; font-weight: 400; }
+    .review-quote {
+      font-size: 0.81rem; color: #334155; font-style: italic;
+      background: #f8fafc; border-left: 3px solid #94a3b8;
+      padding: 6px 10px; margin: 4px 0 4px; border-radius: 0 5px 5px 0;
+      line-height: 1.55;
+    }
+    .review-quote cite { display: block; font-style: normal; font-size: 0.71rem; color: var(--muted); margin-top: 3px; }
+    .review-note { font-size: 0.76rem; color: var(--muted); margin-top: 4px; }
+
+    .divider { border: none; border-top: 1px solid var(--border); margin: 12px 0; }
+
+    .source-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.8rem;
+      color: #2563eb;
+      text-decoration: none;
+      margin-top: 10px;
+    }
+    .source-link:hover { text-decoration: underline; }
+
+    /* Notes box */
+    .notes-box {
+      background: #fefce8;
+      border: 1px solid #fde68a;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-top: 32px;
+    }
+    .notes-box h3 { font-size: 1rem; font-weight: 700; margin-bottom: 10px; }
+    .notes-box ul { padding-left: 18px; font-size: 0.87rem; }
+    .notes-box li { margin-bottom: 6px; }
+
+    /* Stars */
+    .stars { color: #f59e0b; }
+
+    /* Contact info */
+    .contact-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+    .contact-item {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px;
+      padding: 4px 10px; font-size: 0.8rem; color: var(--text);
+    }
+    .contact-item a { color: var(--taichung); text-decoration: none; }
+    .contact-item a:hover { text-decoration: underline; }
+    .contact-hours { font-size: 0.78rem; color: var(--muted); margin-top: 4px; }
+
+    /* Date chips */
+    .date-section { margin-top: 12px; }
+    .date-month { font-size: 0.78rem; font-weight: 700; color: var(--muted); margin: 8px 0 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .date-chips { display: flex; flex-wrap: wrap; gap: 4px; }
+    .dc {
+      display: inline-flex; flex-direction: column; align-items: center;
+      border-radius: 6px; padding: 3px 6px; font-size: 0.72rem; font-weight: 600;
+      min-width: 36px; text-align: center; border: 1px solid transparent;
+    }
+    .dc-open   { background: #dcfce7; color: #15803d; border-color: #86efac; }
+    .dc-forming{ background: #fef3c7; color: #92400e; border-color: #fcd34d; }
+    .dc-lottery{ background: #dbeafe; color: #1d4ed8; border-color: #93c5fd; }
+    .dc-full   { background: #fee2e2; color: #9f1239; border-color: #fca5a5; text-decoration: line-through; }
+    .dc-tight  { background: #fce7f3; color: #9d174d; border-color: #f9a8d4; }
+    .dc-skip  { background: #e2e8f0; color: #94a3b8; border-color: #cbd5e1; }
+    .dc .dc-price { font-size: 0.65rem; font-weight: 400; opacity: 0.85; }
+    .date-legend { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 4px; font-size: 0.73rem; }
+    .date-legend span { display: flex; align-items: center; gap: 3px; }
+    .dl { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+    .dl-open    { background: #dcfce7; border: 1px solid #86efac; }
+    .dl-forming { background: #fef3c7; border: 1px solid #fcd34d; }
+    .dl-lottery { background: #dbeafe; border: 1px solid #93c5fd; }
+    .dl-full    { background: #fee2e2; border: 1px solid #fca5a5; }
+    .dl-tight   { background: #fce7f3; border: 1px solid #f9a8d4; }
+
+    @media (max-width: 600px) {
+      .card-header { flex-direction: column; }
+      .card-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <div class="page-header">
+    <h1>🏔 玉山主峰登山團比較 2026</h1>
+    <p>僅收錄 <strong>兩天一夜</strong>、<strong>兩天兩夜</strong> 行程 ∙ 優先台中出發，次選嘉義出發 ∙ 更新日期：2026-06-02</p>
+  </div>
+
+  <div class="legend">
+    <span class="legend-item"><span class="dot dot-taichung"></span>台中出發（優先）</span>
+    <span class="legend-item"><span class="dot dot-chiayi"></span>嘉義出發（次選）</span>
+    <span class="legend-item"><span class="dot dot-both"></span>台中 + 嘉義皆可</span>
+  </div>
+
+  <!-- ===== QUICK COMPARE TABLE ===== -->
+  <div class="section-title">快速比較表</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>業者</th>
+          <th>行程天數</th>
+          <th>費用（每人）</th>
+          <th>集合地點 / 時間</th>
+          <th>行程概要</th>
+          <th>餐食</th>
+          <th>成團人數</th>
+          <th>評價 &amp; 口碑</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>好野旅遊</strong></td>
+          <td><span class="tag tag-2d1n">2天1夜</span></td>
+          <td class="price-em">NT$5,800–6,300</td>
+          <td>台中高鐵站 05:30</td>
+          <td class="note-sm">D1: 台中高鐵站 05:30 → 塔塔加 → 排雲山莊 → 過夜<br>D2: 攻頂玉山主峰 → 返台中</td>
+          <td class="meal-cell"><span class="meal-yes">✓ D1晚、D2早+早午</span><span class="meal-no">✗ 午餐自備</span></td>
+          <td>7人以上送件</td>
+          <td class="rev-cell"><span class="rev-score">📊 Tripbaa 4.2/5</span><span class="rev-sub">27 則 · 評論較少</span></td>
+        </tr>
+        <tr>
+          <td><strong>荒野旅人</strong></td>
+          <td><span class="tag tag-2d1n">2天1夜</span></td>
+          <td class="price-em">需洽詢</td>
+          <td>台中烏日公司 05:30</td>
+          <td class="note-sm">D1: 台中烏日 05:30 → 塔塔加 → 孟祿亭 → 排雲山莊 → 過夜<br>D2: 攻頂玉山主峰 → 台中 17:30</td>
+          <td class="meal-cell"><span class="meal-yes">✓ D1晚、D2早+早午</span><span class="meal-no">✗ 午餐自備</span></td>
+          <td>–</td>
+          <td class="rev-cell"><span class="rev-score">⭐ Google 4.9/5</span><span class="rev-sub">148 則 · FB 98%推薦</span></td>
+        </tr>
+        <tr>
+          <td><strong>珠峰國際旅行社</strong></td>
+          <td><span class="tag tag-2d1n">2天1夜</span></td>
+          <td class="price-em">NT$4,900–5,600</td>
+          <td>嘉義黃山會館 05:00<br><span class="note-sm">→ 塔塔加 07:30</span></td>
+          <td class="note-sm">D1: 嘉義 05:00 → 塔塔加 → 排雲山莊 → 過夜<br>D2: 06:00 攻頂玉山主峰 → 嘉義</td>
+          <td class="meal-cell"><span class="meal-yes">✓ D1晚、D2早、登頂泡麵</span><span class="meal-no">✗ D1早、兩天午自備</span></td>
+          <td>最多11人/隊</td>
+          <td class="rev-cell"><span class="rev-sub rev-sparse">無數字評分</span><span class="rev-sub">Dcard: 評價稀少</span></td>
+        </tr>
+        <tr>
+          <td><strong>橘子貓 TTtrips</strong></td>
+          <td><span class="tag tag-2d2n">2天2夜</span></td>
+          <td class="price-em">NT$7,650</td>
+          <td>台中高鐵站 17:30（D0）<br><span class="note-sm">台北板橋站 15:00（備選）</span></td>
+          <td class="note-sm">D0: 台中 17:30 → 望鄉部落民宿<br>D1: 塔塔加 → 排雲山莊 → 過夜<br>D2: 攻頂玉山主峰 → 返台中</td>
+          <td class="meal-cell"><span class="meal-yes">✓ 山莊餐（晚+早）</span><span class="meal-no">✗ 午餐自備</span></td>
+          <td>6人以上</td>
+          <td class="rev-cell"><span class="rev-score">🗺 TripAdvisor</span><span class="rev-sub">≈15 則 · 整體正面</span></td>
+        </tr>
+        <tr>
+          <td><strong>山問攀登 TGH</strong></td>
+          <td><span class="tag tag-2d2n">2天2夜</span></td>
+          <td class="price-em">NT$7,700</td>
+          <td>台中高鐵站 20:00（D0）</td>
+          <td class="note-sm">D0: 台中 20:00 → 望鄉部落民宿<br>D1: 塔塔加 → 排雲山莊 → 過夜<br>D2: 攻頂玉山主峰 → 返台中</td>
+          <td class="meal-cell"><span class="meal-yes">✓ D1早+晚、D2早</span><span class="meal-no">✗ 午餐自備</span></td>
+          <td>7人以上（可包團）</td>
+          <td class="rev-cell"><span class="rev-sub rev-sparse">無數字評分</span><span class="rev-sub">PTT: 有用心推薦</span></td>
+        </tr>
+        <tr>
+          <td><strong>岳野登山社</strong></td>
+          <td><span class="tag tag-2d2n">2天2夜</span></td>
+          <td class="price-em">NT$7,900（台中）</td>
+          <td>台中高鐵站出口7 20:00（D0）<br><span class="note-sm">台北車站西3門 18:00 ∙ 高雄高鐵 19:00</span></td>
+          <td class="note-sm">D0: 台中 20:00 → 前一晚住宿<br>D1: 塔塔加 → 排雲山莊 → 過夜<br>D2: 攻頂玉山主峰 → 各城市返程</td>
+          <td class="meal-cell"><span class="meal-yes">✓ 各天早+晚</span><span class="meal-no">✗ 午餐自備</span></td>
+          <td>7人以上</td>
+          <td class="rev-cell"><span class="rev-sub">Dcard 5大之一</span><span class="rev-sub">部落格口碑佳</span></td>
+        </tr>
+        <tr>
+          <td><strong>好野旅遊 2天2夜版</strong></td>
+          <td><span class="tag tag-2d2n">2天2夜</span></td>
+          <td class="price-em">NT$7,400–7,800</td>
+          <td>台北車站 19:00（D1起點）<br><span class="note-sm">台中烏日高鐵站 中途接送</span></td>
+          <td class="note-sm">D1: 台中烏日上車 → 民宿入住<br>D2: 塔塔加 → 排雲山莊 → 過夜<br>D3: 攻頂玉山主峰 → 慶功宴 → 台中</td>
+          <td class="meal-cell"><span class="meal-yes">✓ D2+D3早+晚、慶功宴</span><span class="meal-no">✗ 午餐自備</span></td>
+          <td>7–30人</td>
+          <td class="rev-cell"><span class="rev-score">📊 Tripbaa 4.2/5</span><span class="rev-sub">27 則（同業者①）</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note-sm" style="margin-bottom:8px;">* 排雲山莊 2026 年整修中，更換服務廠商後每人餐費與裝備費預計漲價 NT$200。</p>
+
+
+  <!-- ===== DATE GRID ===== -->
+  <div class="section-title">週末梯次一覽</div>
+  <div class="table-wrap">
+    <table class="avail-table">
+      <thead>
+        <tr>
+          <th class="avail-tour">業者</th>
+          <th colspan="4" class="avail-month">六月</th><th colspan="5" class="avail-month">七月</th><th colspan="4" class="avail-month">八月</th><th colspan="4" class="avail-month">九月</th>
+        </tr>
+        <tr>
+          <th class="avail-tour"></th>
+          <th>6/5–7</th><th>6/12–14</th><th>6/19–21</th><th>6/26–28</th><th>7/3–5</th><th>7/10–12</th><th>7/17–19</th><th>7/24–26</th><th>7/31–8/2</th><th>8/7–9</th><th>8/14–16</th><th>8/21–23</th><th>8/28–30</th><th>9/4–6</th><th>9/11–13</th><th>9/18–20</th><th>9/25–27</th>
+        </tr>
+      </thead>
+      <tbody>
+              <tr><th class="avail-tour">① 好野旅遊<br><span class="avail-sub">2D1N 台中</span></th><td class="avail-cell avail-lottery">⟳</td><td class="avail-cell avail-forming">~</td><td class="avail-cell avail-tight">↗</td><td class="avail-cell avail-forming">~</td><td class="avail-cell avail-open">✓</td><td class="avail-cell avail-open">✓</td><td class="avail-cell avail-open">✓</td><td class="avail-cell avail-open">✓</td><td class="avail-cell avail-open">✓</td><td class="avail-cell avail-open">✓</td><td class="avail-cell avail-open">✓</td><td class="avail-cell avail-open">✓</td><td class="avail-cell avail-open">✓</td><td class="avail-cell avail-open">✓</td><td class="avail-cell avail-open">✓</td><td class="avail-cell avail-tight">↗</td><td class="avail-cell avail-open">✓</td></tr>
+
+              <tr><th class="avail-tour">② 荒野旅人<br><span class="avail-sub">2D1N 台中</span></th><td class="avail-cell avail-inquiry">洽詢</td><td class="avail-cell avail-inquiry">洽詢</td><td class="avail-cell avail-inquiry">洽詢</td><td class="avail-cell avail-inquiry">洽詢</td><td class="avail-cell avail-inquiry">洽詢</td><td class="avail-cell avail-inquiry">洽詢</td><td class="avail-cell avail-inquiry">洽詢</td><td class="avail-cell avail-inquiry">洽詢</td><td class="avail-cell avail-inquiry">洽詢</td><td class="avail-cell avail-inquiry">洽詢</td><td class="avail-cell avail-inquiry">洽詢</td><td class="avail-cell avail-inquiry">洽詢</td><td class="avail-cell avail-inquiry">洽詢</td><td class="avail-cell avail-inquiry">洽詢</td><td class="avail-cell avail-inquiry">洽詢</td><td class="avail-cell avail-inquiry">洽詢</td><td class="avail-cell avail-inquiry">洽詢</td></tr>
+
+              <tr><th class="avail-tour">③ 珠峰旅行社<br><span class="avail-sub">2D1N 嘉義</span></th><td class="avail-cell avail-draw">抽籤</td><td class="avail-cell avail-draw">抽籤</td><td class="avail-cell avail-draw">抽籤</td><td class="avail-cell avail-draw">抽籤</td><td class="avail-cell avail-draw">抽籤</td><td class="avail-cell avail-draw">抽籤</td><td class="avail-cell avail-draw">抽籤</td><td class="avail-cell avail-draw">抽籤</td><td class="avail-cell avail-draw">抽籤</td><td class="avail-cell avail-draw">抽籤</td><td class="avail-cell avail-draw">抽籤</td><td class="avail-cell avail-draw">抽籤</td><td class="avail-cell avail-draw">抽籤</td><td class="avail-cell avail-draw">抽籤</td><td class="avail-cell avail-draw">抽籤</td><td class="avail-cell avail-draw">抽籤</td><td class="avail-cell avail-draw">抽籤</td></tr>
+
+              <tr><th class="avail-tour">④ 橘子貓<br><span class="avail-sub">2D2N 台中</span></th><td class="avail-cell avail-none">–</td><td class="avail-cell avail-none">–</td><td class="avail-cell avail-none">–</td><td class="avail-cell avail-none">–</td><td class="avail-cell avail-none">–</td><td class="avail-cell avail-none">–</td><td class="avail-cell avail-open">✓</td><td class="avail-cell avail-none">–</td><td class="avail-cell avail-none">–</td><td class="avail-cell avail-none">–</td><td class="avail-cell avail-open">✓</td><td class="avail-cell avail-none">–</td><td class="avail-cell avail-none">–</td><td class="avail-cell avail-none">–</td><td class="avail-cell avail-none">–</td><td class="avail-cell avail-open">✓</td><td class="avail-cell avail-none">–</td></tr>
+
+              <tr><th class="avail-tour">⑤ 山問 TGH<br><span class="avail-sub">2D2N 台中</span></th><td class="avail-cell avail-none">–</td><td class="avail-cell avail-none">–</td><td class="avail-cell avail-none">–</td><td class="avail-cell avail-none">–</td><td class="avail-cell avail-open">✓</td><td class="avail-cell avail-open">✓</td><td class="avail-cell avail-open">✓</td><td class="avail-cell avail-open">✓</td><td class="avail-cell avail-none">–</td><td class="avail-cell avail-none">–</td><td class="avail-cell avail-none">–</td><td class="avail-cell avail-none">–</td><td class="avail-cell avail-none">–</td><td class="avail-cell avail-open">✓</td><td class="avail-cell avail-none">–</td><td class="avail-cell avail-none">–</td><td class="avail-cell avail-none">–</td></tr>
+
+              <tr><th class="avail-tour">⑥ 岳野登山社<br><span class="avail-sub">2D2N 台中</span></th><td class="avail-cell avail-daily">每日</td><td class="avail-cell avail-daily">每日</td><td class="avail-cell avail-daily">每日</td><td class="avail-cell avail-daily">每日</td><td class="avail-cell avail-daily">每日</td><td class="avail-cell avail-daily">每日</td><td class="avail-cell avail-daily">每日</td><td class="avail-cell avail-daily">每日</td><td class="avail-cell avail-daily">每日</td><td class="avail-cell avail-daily">每日</td><td class="avail-cell avail-daily">每日</td><td class="avail-cell avail-daily">每日</td><td class="avail-cell avail-daily">每日</td><td class="avail-cell avail-daily">每日</td><td class="avail-cell avail-daily">每日</td><td class="avail-cell avail-daily">每日</td><td class="avail-cell avail-daily">每日</td></tr>
+
+              <tr><th class="avail-tour">⑦ 好野旅遊<br><span class="avail-sub">2D2N 台中</span></th><td class="avail-cell avail-open">✓</td><td class="avail-cell avail-open">✓</td><td class="avail-cell avail-tight">↗</td><td class="avail-cell avail-lottery">⟳</td><td class="avail-cell avail-forming">~</td><td class="avail-cell avail-forming">~</td><td class="avail-cell avail-tight">↗</td><td class="avail-cell avail-forming">~</td><td class="avail-cell avail-forming">~</td><td class="avail-cell avail-open">✓</td><td class="avail-cell avail-open">✓</td><td class="avail-cell avail-forming">~</td><td class="avail-cell avail-forming">~</td><td class="avail-cell avail-forming">~</td><td class="avail-cell avail-forming">~</td><td class="avail-cell avail-tight">↗</td><td class="avail-cell avail-forming">~</td></tr>
+
+      </tbody>
+    </table>
+  </div>
+    <div class="avail-legend">
+      <span class="avail-leg avail-open">✓ 開放報名</span>
+      <span class="avail-leg avail-tight">↗ 名額緊張</span>
+      <span class="avail-leg avail-forming">~ 招募中</span>
+      <span class="avail-leg avail-lottery">⟳ 抽籤制</span>
+      <span class="avail-leg avail-full">✗ 額滿</span>
+      <span class="avail-leg avail-none">– 無梯次</span>
+      <span class="avail-leg avail-inquiry">洽詢</span>
+      <span class="avail-leg avail-daily">每日</span>
+    </div>
+  <p class="note-sm" style="margin-top:6px;margin-bottom:8px;">* 狀態以各業者官網即時資料為準；② 荒野旅人 採洽詢報名；③ 珠峰 及 ⑥ 岳野 為抽籤/每日開團，實際名額請洽業者確認。</p>
+
+  <!-- ===== TOUR CARDS ===== -->
+  <div class="section-title">各行程詳細資訊</div>
+<div class="cards">
+
+    <!-- ① 好野旅遊 2D1N 台中 -->
+    <div class="card">
+      <div class="card-header card-header-tc">
+        <div>
+          <div class="card-title">① 好野旅遊《台灣屋脊》玉山主峰 — 兩天一夜</div>
+          <div class="card-provider">好野旅遊（Benz Travel Agency）∙ 甲種旅行社</div>
+        </div>
+        <div class="card-tags">
+          <span class="tag tag-tc">台中烏日高鐵</span>
+          <span class="tag tag-2d1n">2天1夜</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-grid">
+          <div>
+            <div class="field-label">每人費用</div>
+            <div class="field-value big-price">NT$5,800–6,300</div>
+            <div class="note-sm">依出發梯次而異</div>
+          </div>
+          <div>
+            <div class="field-label">集合地點 / 時間</div>
+            <div class="field-value">台中高鐵站 05:30 集合出發</div>
+          </div>
+          <div>
+            <div class="field-label">行程概要</div>
+            <div class="field-value">D1: 台中烏日 → 塔塔加 → 排雲山莊(3402m) → 過夜<br>D2: 03:30 攻頂 → 玉山主峰(3952m) → 返台中</div>
+          </div>
+        </div>
+        <div style="margin-top:14px;">
+          <div class="field-label">2026 可報名日期 <span class="note-sm">（即時資料，已售完或快滿請至官網確認）</span></div>
+          <div class="date-legend">
+            <span><span class="dl dl-open"></span>可報名</span>
+            <span><span class="dl dl-forming"></span>即將成團</span>
+            <span><span class="dl dl-lottery"></span>已成團待抽籤</span>
+            <span><span class="dl dl-tight"></span>剩1–2位</span>
+            <span><span class="dl dl-full"></span>額滿</span>
+          </div>
+          <div class="date-section">
+            <div class="date-month">六月</div>
+            <div class="date-chips">
+              <span class="dc dc-skip">6/1<span class="dc-price">$6,300</span></span><span class="dc dc-skip">6/3<span class="dc-price">$6,300</span></span><span class="dc dc-lottery">6/5<span class="dc-price">$6,300</span></span><span class="dc dc-lottery">6/6<span class="dc-price">$6,300</span></span><span class="dc dc-lottery">6/7<span class="dc-price">$6,300</span></span><span class="dc dc-skip">6/9<span class="dc-price">$6,300</span></span><span class="dc dc-skip">6/11<span class="dc-price">$6,300</span></span><span class="dc dc-forming">6/12<span class="dc-price">$5,800</span></span><span class="dc dc-full">6/13<span class="dc-price">$6,300</span></span><span class="dc dc-forming">6/14<span class="dc-price">$6,300</span></span><span class="dc dc-skip">6/15<span class="dc-price">$6,300</span></span><span class="dc dc-skip">6/17<span class="dc-price">$6,300</span></span><span class="dc dc-tight">6/19<span class="dc-price">$6,300</span></span><span class="dc dc-full">6/20<span class="dc-price">$6,300</span></span><span class="dc dc-tight">6/21<span class="dc-price">$6,300</span></span><span class="dc dc-skip">6/23<span class="dc-price">$6,300</span></span><span class="dc dc-skip">6/25<span class="dc-price">$6,300</span></span><span class="dc dc-forming">6/26<span class="dc-price">$6,300</span></span><span class="dc dc-forming">6/27<span class="dc-price">$6,300</span></span><span class="dc dc-forming">6/28<span class="dc-price">$6,300</span></span>
+            </div>
+            <div class="date-month">七月</div>
+            <div class="date-chips">
+              <span class="dc dc-skip">7/1<span class="dc-price">$6,300</span></span><span class="dc dc-open">7/3<span class="dc-price">$6,300</span></span><span class="dc dc-open">7/5<span class="dc-price">$6,300</span></span><span class="dc dc-skip">7/6<span class="dc-price">$6,300</span></span><span class="dc dc-skip">7/7<span class="dc-price">$6,300</span></span><span class="dc dc-skip">7/9<span class="dc-price">$6,300</span></span><span class="dc dc-open">7/11<span class="dc-price">$6,300</span></span><span class="dc dc-open">7/12<span class="dc-price">$5,800</span></span><span class="dc dc-skip">7/13<span class="dc-price">$6,300</span></span><span class="dc dc-skip">7/14<span class="dc-price">$6,300</span></span><span class="dc dc-skip">7/15<span class="dc-price">$6,300</span></span><span class="dc dc-open">7/17<span class="dc-price">$6,300</span></span><span class="dc dc-tight">7/19<span class="dc-price">$6,300</span></span><span class="dc dc-skip">7/20<span class="dc-price">$6,300</span></span><span class="dc dc-skip">7/21<span class="dc-price">$6,300</span></span><span class="dc dc-skip">7/23<span class="dc-price">$6,300</span></span><span class="dc dc-open">7/25<span class="dc-price">$6,300</span></span><span class="dc dc-open">7/26<span class="dc-price">$6,300</span></span><span class="dc dc-skip">7/27<span class="dc-price">$6,300</span></span><span class="dc dc-skip">7/28<span class="dc-price">$6,300</span></span>
+            </div>
+            <div class="date-month">八月</div>
+            <div class="date-chips">
+              <span class="dc dc-open">8/1<span class="dc-price">$6,300</span></span><span class="dc dc-skip">8/3<span class="dc-price">$6,300</span></span><span class="dc dc-skip">8/5<span class="dc-price">$6,300</span></span><span class="dc dc-skip">8/6<span class="dc-price">$6,300</span></span><span class="dc dc-lottery">8/7<span class="dc-price">$6,300</span></span><span class="dc dc-open">8/9<span class="dc-price">$6,300</span></span><span class="dc dc-skip">8/11<span class="dc-price">$6,300</span></span><span class="dc dc-skip">8/12<span class="dc-price">$5,800</span></span><span class="dc dc-skip">8/13<span class="dc-price">$6,300</span></span><span class="dc dc-open">8/14<span class="dc-price">$6,300</span></span><span class="dc dc-open">8/15<span class="dc-price">$6,300</span></span><span class="dc dc-skip">8/17<span class="dc-price">$6,300</span></span><span class="dc dc-skip">8/19<span class="dc-price">$6,300</span></span><span class="dc dc-skip">8/20<span class="dc-price">$6,300</span></span><span class="dc dc-tight">8/21<span class="dc-price">$6,300</span></span><span class="dc dc-open">8/23<span class="dc-price">$6,300</span></span><span class="dc dc-skip">8/25<span class="dc-price">$6,300</span></span><span class="dc dc-skip">8/26<span class="dc-price">$6,300</span></span><span class="dc dc-skip">8/27<span class="dc-price">$6,300</span></span><span class="dc dc-open">8/28<span class="dc-price">$6,300</span></span>
+            </div>
+            <div class="date-month">九月</div>
+            <div class="date-chips">
+              <span class="dc dc-skip">9/1<span class="dc-price">$6,300</span></span><span class="dc dc-skip">9/3<span class="dc-price">$6,300</span></span><span class="dc dc-open">9/5<span class="dc-price">$6,300</span></span><span class="dc dc-lottery">9/6<span class="dc-price">$6,300</span></span><span class="dc dc-skip">9/7<span class="dc-price">$6,300</span></span><span class="dc dc-skip">9/9<span class="dc-price">$6,300</span></span><span class="dc dc-open">9/11<span class="dc-price">$6,300</span></span><span class="dc dc-open">9/12<span class="dc-price">$5,800</span></span><span class="dc dc-full">9/13<span class="dc-price">$6,300</span></span><span class="dc dc-skip">9/14<span class="dc-price">$6,300</span></span><span class="dc dc-skip">9/15<span class="dc-price">$6,300</span></span><span class="dc dc-skip">9/17<span class="dc-price">$6,300</span></span><span class="dc dc-tight">9/19<span class="dc-price">$6,300</span></span><span class="dc dc-full">9/20<span class="dc-price">$6,300</span></span><span class="dc dc-skip">9/21<span class="dc-price">$6,300</span></span><span class="dc dc-skip">9/23<span class="dc-price">$6,300</span></span><span class="dc dc-open">9/25<span class="dc-price">$6,300</span></span><span class="dc dc-open">9/26<span class="dc-price">$6,300</span></span><span class="dc dc-open">9/27<span class="dc-price">$6,300</span></span><span class="dc dc-skip">9/28<span class="dc-price">$6,300</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="card-grid" style="margin-top:14px;">
+          <div>
+            <div class="field-label">成團條件</div>
+            <div class="field-value">滿7人送件抽籤<br><span class="note-sm">出發前35天截止報名，30天抽籤</span></div>
+          </div>
+          <div>
+            <div class="field-label">嚮導比例</div>
+            <div class="field-value">1:7（嚮導:學員）</div>
+          </div>
+          <div>
+            <div class="field-label">體能要求</div>
+            <div class="field-value">每週至少3次60分鐘慢跑<br>近半年10次以上登山經驗</div>
+          </div>
+          <div>
+            <div class="field-label">保險</div>
+            <div class="field-value">旅責險 NT$300萬<br>+ 登山險 NT$200萬</div>
+          </div>
+          <div>
+            <div class="field-label">報名網頁</div>
+            <div class="field-value"><a href="https://www.goodtour.com.tw/travel-detail.aspx?Id=192" target="_blank" class="source-link" style="margin-top:0;font-size:0.82rem;">🔗 goodtour.com.tw/travel-detail.aspx?Id=192</a></div>
+          </div>
+        </div>
+        <hr class="divider">
+        <div class="field-label" style="margin-bottom:6px;">費用包含 / 不包含</div>
+        <div class="include-list">
+          <span class="include-item yes">✓ 來回交通</span><span class="include-item yes">✓ 專業嚮導</span><span class="include-item yes">✓ 排雲山莊住宿</span><span class="include-item yes">✓ 睡袋</span><span class="include-item yes">✓ D1晚餐</span><span class="include-item yes">✓ D2早餐+早午餐</span><span class="include-item yes">✓ 雙重保險</span><span class="include-item yes">✓ 入山入園許可代辦</span><span class="include-item no">✗ 午餐（自備）</span>
+        </div>
+        <hr class="divider">
+        <div class="field-label">退費政策</div>
+        <div class="field-value note-sm">抽中後訂金 NT$3,500 不退；未抽中可換梯次或退款（扣 NT$300 手續費）</div>
+        <hr class="divider">
+        <div class="field-label">聯絡資訊</div>
+        <div class="contact-grid">
+          <span class="contact-item">📞 <a href="tel:0225318401">02-2531-8401</a></span>
+          <span class="contact-item">✉️ <a href="mailto:goodtour@goodtour.com.tw">goodtour@goodtour.com.tw</a></span>
+          <span class="contact-item">💬 <a href="https://lin.ee/yJuKCUg" target="_blank">LINE 官方帳號</a></span>
+          <span class="contact-item">📘 <a href="https://fb.me/goodtoursharing" target="_blank">Facebook</a></span>
+        </div>
+        <div class="contact-hours">🕐 週一至週五 09:00–18:00（例假日休）∙ 台北市中正區紹興北街35號6F-3</div>
+        <hr class="divider">
+        <div class="field-label">評價 &amp; 口碑</div>
+        <div class="review-ratings">
+          <span class="review-badge review-badge-trip">📊 Tripbaa 4.2 / 5 <span class="review-count">27 則</span></span>
+          <span class="review-badge review-badge-note">💻 Facebook 15,224 追蹤</span>
+        </div>
+        <div class="review-note">第三方獨立評論較少；Tripresso 亦有列表。未見重大負評。</div>
+      </div>
+    </div>
+
+    <!-- ② 荒野旅人 2D1N 台中 -->
+    <div class="card">
+      <div class="card-header card-header-tc">
+        <div>
+          <div class="card-title">② 荒野旅人《圈谷·冰斗·東亞之巔》玉山主峰 — 兩天一夜</div>
+          <div class="card-provider">荒野旅人國際旅行社</div>
+        </div>
+        <div class="card-tags">
+          <span class="tag tag-tc">台中烏日</span>
+          <span class="tag tag-2d1n">2天1夜</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-grid">
+          <div>
+            <div class="field-label">每人費用</div>
+            <div class="field-value big-price">需洽詢</div>
+            <div class="note-sm">2026 排雲山莊整修，餐費/裝備費漲 NT$200</div>
+          </div>
+          <div>
+            <div class="field-label">集合地點 / 時間</div>
+            <div class="field-value">台中烏日公司 05:30<br><span class="note-sm">可提供前一晚住宿（清潔費 NT$500）</span></div>
+          </div>
+          <div>
+            <div class="field-label">行程概要</div>
+            <div class="field-value">D1: 05:30 台中烏日 → 塔塔加 → 孟祿亭 → 西峰觀景台 → 排雲山莊(3402m)，約5小時<br>D2: 攻頂玉山主峰(3952m) → 塔塔加 → 台中 17:30</div>
+          </div>
+        </div>
+        <div style="margin-top:14px;">
+          <div class="field-label">2026 可報名日期</div>
+          <div class="field-value" style="margin-top:4px;">持續開團，日期選取為 JavaScript 動態載入頁面，無法自動抓取<br><span class="note-sm">⚠️ 請直接電話或 LINE 洽詢確認可出發日期</span></div>
+        </div>
+        <div class="card-grid" style="margin-top:14px;">
+          <div>
+            <div class="field-label">成團條件</div>
+            <div class="field-value">–</div>
+          </div>
+          <div>
+            <div class="field-label">嚮導比例</div>
+            <div class="field-value">–</div>
+          </div>
+          <div>
+            <div class="field-label">體能要求</div>
+            <div class="field-value">–</div>
+          </div>
+          <div>
+            <div class="field-label">保險</div>
+            <div class="field-value">含登山保險<br><span class="note-sm">詳細金額請洽詢</span></div>
+          </div>
+          <div>
+            <div class="field-label">報名網頁</div>
+            <div class="field-value"><a href="https://travelwildtw.com/item/PD649f19becf5eb" target="_blank" class="source-link" style="margin-top:0;font-size:0.82rem;">🔗 travelwildtw.com/item/PD649f19becf5eb</a></div>
+          </div>
+        </div>
+        <hr class="divider">
+        <div class="field-label" style="margin-bottom:6px;">費用包含 / 不包含</div>
+        <div class="include-list">
+          <span class="include-item yes">✓ 台中往返交通</span><span class="include-item yes">✓ 嚮導費</span><span class="include-item yes">✓ 排雲山莊住宿</span><span class="include-item yes">✓ 睡袋</span><span class="include-item yes">✓ D1晚餐</span><span class="include-item yes">✓ D2早餐+早午餐</span><span class="include-item yes">✓ 登山保險</span><span class="include-item yes">✓ 入山入園許可代辦</span><span class="include-item no">✗ 午餐（自備）</span>
+        </div>
+        <hr class="divider">
+        <div class="field-label">退費政策</div>
+        <div class="field-value note-sm">請洽詢業者</div>
+        <hr class="divider">
+        <div class="field-label">聯絡資訊</div>
+        <div class="contact-grid">
+          <span class="contact-item">📞 <a href="tel:0437028721">04-3702-8721</a></span>
+          <span class="contact-item">✉️ <a href="mailto:travelwlidtw@travelwildtw.com">travelwlidtw@travelwildtw.com</a></span>
+          <span class="contact-item">💬 LINE: @travelwildtw</span>
+          <span class="contact-item">📸 <a href="https://www.instagram.com/travelwild_tw/" target="_blank">Instagram</a></span>
+        </div>
+        <div class="contact-hours">🕐 週一至週五 08:00–17:00 ∙ 台中市南區忠明南路787號40樓</div>
+        <hr class="divider">
+        <div class="field-label">評價 &amp; 口碑</div>
+        <div class="review-ratings">
+          <span class="review-badge review-badge-google">⭐ Google 4.9 / 5 <span class="review-count">148 則</span></span>
+          <span class="review-badge review-badge-fb">💬 Facebook 98% 推薦 <span class="review-count">103 則</span></span>
+          <span class="review-badge review-badge-pinkoi">🛒 Pinkoi 5.0 / 5 <span class="review-count">12 則</span></span>
+        </div>
+        <blockquote class="review-quote">「推薦荒野旅人，嚮導年輕專業又有活力，帶隊很用心。」<cite>— PTT Hiking 板 2025</cite></blockquote>
+        <div class="review-note">一則 Dcard 批評天候撤退決策，未影響整體口碑。</div>
+      </div>
+    </div>
+
+    <!-- ③ 珠峰國際旅行社 2D1N 嘉義 -->
+    <div class="card">
+      <div class="card-header card-header-cy">
+        <div>
+          <div class="card-title">③ 珠峰國際旅行社 玉山主峰 — 嘉義出發 兩天一夜</div>
+          <div class="card-provider">珠峰國際旅行社（南部最大專業登山社）</div>
+        </div>
+        <div class="card-tags">
+          <span class="tag tag-cy">嘉義出發</span>
+          <span class="tag tag-2d1n">2天1夜</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-grid">
+          <div>
+            <div class="field-label">每人費用（依人數）</div>
+            <div class="field-value big-price">NT$4,900–5,600</div>
+            <div class="note-sm">7人以上 $4,900 ∙ 4–6人 $5,200 ∙ 2–3人 $5,400 ∙ 1人 $5,600<br>週末/假日 +NT$300</div>
+          </div>
+          <div>
+            <div class="field-label">集合地點 / 時間</div>
+            <div class="field-value">嘉義市上海路243號（黃山會館）05:00<br>→ 塔塔加登山口 07:30 抵達</div>
+          </div>
+          <div>
+            <div class="field-label">行程概要</div>
+            <div class="field-value">D1: 嘉義 05:00 → 塔塔加 → 排雲山莊(3402m) → 過夜<br>D2: 06:00 攻頂玉山主峰(3952m) → 塔塔加 → 嘉義</div>
+          </div>
+        </div>
+        <div style="margin-top:14px;">
+          <div class="field-label">2026 可報名日期</div>
+          <div class="field-value" style="margin-top:4px;">自訂日期，提前1個月報名，指定多個希望日期送件抽籤<br><span class="note-sm">每月1日開放報名下個月梯次；每日玉山限額116人，建議多備幾個備選日</span></div>
+        </div>
+        <div class="card-grid" style="margin-top:14px;">
+          <div>
+            <div class="field-label">成團條件</div>
+            <div class="field-value">最多11人/隊<br><span class="note-sm">超過11人需自行分隊</span></div>
+          </div>
+          <div>
+            <div class="field-label">嚮導比例</div>
+            <div class="field-value">–</div>
+          </div>
+          <div>
+            <div class="field-label">體能要求</div>
+            <div class="field-value">需在6小時內抵達排雲山莊<br><span class="note-sm">嚮導依狀況有權禁止攻頂</span></div>
+          </div>
+          <div>
+            <div class="field-label">保險</div>
+            <div class="field-value">意外險 NT$500萬<br>+ 醫療 NT$10萬</div>
+          </div>
+          <div>
+            <div class="field-label">報名網頁</div>
+            <div class="field-value"><a href="https://www.mount-qomolangma.com/home/productdetail/121669" target="_blank" class="source-link" style="margin-top:0;font-size:0.82rem;">🔗 mount-qomolangma.com/home/productdetail/121669</a></div>
+          </div>
+        </div>
+        <hr class="divider">
+        <div class="field-label" style="margin-bottom:6px;">費用包含 / 不包含</div>
+        <div class="include-list">
+          <span class="include-item yes">✓ 嘉義往返交通</span><span class="include-item yes">✓ 嚮導費</span><span class="include-item yes">✓ 睡袋</span><span class="include-item yes">✓ D1晚餐</span><span class="include-item yes">✓ D2早餐</span><span class="include-item yes">✓ 登頂後泡麵</span><span class="include-item yes">✓ 保險</span><span class="include-item yes">✓ 入山入園許可代辦</span><span class="include-item no">✗ 山莊床位費 NT$480（現場自付）</span><span class="include-item no">✗ 接駁 NT$150×2（自付）</span><span class="include-item no">✗ D1早餐（自備）</span><span class="include-item no">✗ 兩天午餐（自備）</span>
+        </div>
+        <hr class="divider">
+        <div class="field-label">退費政策</div>
+        <div class="field-value note-sm">抽中後不可退訂金；主動放棄抽籤次數需繳 NT$200 手續費</div>
+        <hr class="divider">
+        <div class="field-label">聯絡資訊</div>
+        <div class="contact-grid">
+          <span class="contact-item">📞 <a href="tel:0528357130">(05) 283-5713</a></span>
+          <span class="contact-item">📞 <a href="tel:0935437026">0935-437-026</a></span>
+          <span class="contact-item">📞 <a href="tel:0912981313">0912-981-313（小婉）</a></span>
+          <span class="contact-item">✉️ <a href="mailto:c13138848@gmail.com">c13138848@gmail.com</a></span>
+          <span class="contact-item">💬 LINE: @jbr9376n</span>
+        </div>
+        <div class="contact-hours">🕐 13:00–22:00 ∙ 嘉義市西區上海路243號（黃山會館）</div>
+        <hr class="divider">
+        <div class="field-label">評價 &amp; 口碑</div>
+        <blockquote class="review-quote">「玉山攻頂時跟著嚮導的步伐，真的輕鬆許多！」<cite>— 官網客戶回饋（游閔涵）</cite></blockquote>
+        <div class="review-note">Dcard 有人問評價時指出「網路上的評價很少」；無公開數字評分。</div>
+      </div>
+    </div>
+
+    <!-- ④ 橘子貓 TTtrips 2D1N -->
+    <div class="card">
+      <div class="card-header card-header-both">
+        <div>
+          <div class="card-title">④ 橘子貓 TTtrips 玉山主峰 — 兩天兩夜</div>
+          <div class="card-provider">橘子貓 TTtrips（甲種旅行社 交觀甲字4161號）</div>
+        </div>
+        <div class="card-tags">
+          <span class="tag tag-both">台中高鐵（台北亦可）</span>
+          <span class="tag tag-2d2n">2天2夜</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-grid">
+          <div>
+            <div class="field-label">每人費用</div>
+            <div class="field-value big-price">NT$7,650</div>
+            <div class="note-sm">以 8car 平台刊登售價為準，洽詢是否有其他優惠</div>
+          </div>
+          <div>
+            <div class="field-label">集合地點 / 時間</div>
+            <div class="field-value">🥇 台中高鐵站 17:30（D0）<br>台北板橋站 15:00（備選）</div>
+          </div>
+          <div>
+            <div class="field-label">行程概要</div>
+            <div class="field-value">D0: 台中17:30 → 望鄉部落民宿過夜<br>D1: 塔塔加登山口 → 排雲山莊(3402m)<br>D2: 攻頂玉山主峰(3952m) → 返台中</div>
+          </div>
+        </div>
+        <div style="margin-top:14px;">
+          <div class="field-label">2026 可報名日期 <span class="note-sm">（網頁顯示固定三梯次，建議致電確認為2026年）</span></div>
+          <div class="date-chips" style="margin-top:6px;">
+            <span class="dc dc-open">7/16–18<span class="dc-price">$7,150</span></span>
+            <span class="dc dc-open">8/13–15<span class="dc-price">$7,150</span></span>
+            <span class="dc dc-open">9/17–19<span class="dc-price">$7,150</span></span>
+          </div>
+        </div>
+        <div class="card-grid" style="margin-top:14px;">
+          <div>
+            <div class="field-label">成團條件</div>
+            <div class="field-value">6人以上</div>
+          </div>
+          <div>
+            <div class="field-label">嚮導比例</div>
+            <div class="field-value">–</div>
+          </div>
+          <div>
+            <div class="field-label">體能要求</div>
+            <div class="field-value">–</div>
+          </div>
+          <div>
+            <div class="field-label">保險</div>
+            <div class="field-value">旅責險<br><span class="note-sm">金額洽詢</span></div>
+          </div>
+          <div>
+            <div class="field-label">報名網頁</div>
+            <div class="field-value"><a href="https://8car.com.tw/goodmore/421" target="_blank" class="source-link" style="margin-top:0;font-size:0.82rem;">🔗 8car.com.tw/goodmore/421</a></div>
+          </div>
+        </div>
+        <hr class="divider">
+        <div class="field-label" style="margin-bottom:6px;">費用包含 / 不包含</div>
+        <div class="include-list">
+          <span class="include-item yes">✓ 來回交通</span><span class="include-item yes">✓ 嚮導</span><span class="include-item yes">✓ 望鄉部落民宿（D0）</span><span class="include-item yes">✓ 排雲山莊住宿（D1）</span><span class="include-item yes">✓ 山莊餐點</span><span class="include-item yes">✓ 入山入園許可代辦</span><span class="include-item yes">✓ 旅責險</span><span class="include-item no">✗ 午餐（自備）</span>
+        </div>
+        <hr class="divider">
+        <div class="field-label">退費政策</div>
+        <div class="field-value note-sm">天災可改期；個人取消收行政費 NT$300；山莊未抽中造成損失不退</div>
+        <hr class="divider">
+        <div class="field-label">聯絡資訊</div>
+        <div class="contact-grid">
+          <span class="contact-item">📞 <a href="tel:0229343589">02-2934-3589</a></span>
+          <span class="contact-item">📞 <a href="tel:0979341790">0979-341-790</a></span>
+          <span class="contact-item">✉️ <a href="mailto:orangecat.tttrips@gmail.com">orangecat.tttrips@gmail.com</a></span>
+          <span class="contact-item">💬 WeChat: orangecat2015</span>
+          <span class="contact-item">📘 <a href="https://www.facebook.com/%E6%A9%98%E5%AD%90%E8%B2%93TTtrips" target="_blank">Facebook 橘子貓TTtrips</a></span>
+        </div>
+        <div class="contact-hours">🏠 台北市文山區羅斯福路6段107號</div>
+        <hr class="divider">
+        <div class="field-label">評價 &amp; 口碑</div>
+        <div class="review-ratings">
+          <span class="review-badge review-badge-trip">🗺 TripAdvisor ≈15 則 <span class="review-count">整體正面</span></span>
+          <span class="review-badge review-badge-fb">💬 Facebook ≈94% 推薦 <span class="review-count">39 則（未核實）</span></span>
+        </div>
+        <div class="review-note">現有評論多針對包車服務；玉山登山行程之獨立評論尚少。</div>
+      </div>
+    </div>
+
+    <!-- ⑤ 山問攀登 TGH 2D2N 台中 -->
+    <div class="card">
+      <div class="card-header card-header-tc">
+        <div>
+          <div class="card-title">⑤ 山問攀登 TGH 玉山主峰《島嶼之巔》— 兩天兩夜</div>
+          <div class="card-provider">TGH 山問攀登（山閱紀錄有限公司）</div>
+        </div>
+        <div class="card-tags">
+          <span class="tag tag-tc">台中高鐵</span>
+          <span class="tag tag-2d2n">2天2夜</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-grid">
+          <div>
+            <div class="field-label">每人費用</div>
+            <div class="field-value big-price">NT$7,700（含稅）</div>
+          </div>
+          <div>
+            <div class="field-label">集合地點 / 時間</div>
+            <div class="field-value">台中高鐵站 20:00（D0夜間出發）</div>
+          </div>
+          <div>
+            <div class="field-label">行程概要</div>
+            <div class="field-value">D0: 台中20:00 → 望鄉部落民宿過夜<br>D1: 塔塔加 → 排雲山莊(3402m) → 過夜<br>D2: 攻頂玉山主峰(3952m) → 返台中</div>
+          </div>
+        </div>
+        <div style="margin-top:14px;">
+          <div class="field-label">2026 可報名日期 <span class="note-sm">（網頁梯次年份未明確標示，建議洽 LINE 確認）</span></div>
+          <div class="date-chips" style="margin-top:6px;">
+            <span class="dc dc-open">7/3–4<span class="dc-price">$7,700</span></span>
+            <span class="dc dc-open">7/4–5<span class="dc-price">$7,700</span></span>
+            <span class="dc dc-open">7/11–12<span class="dc-price">$7,700</span></span>
+            <span class="dc dc-open">7/17–18<span class="dc-price">$7,700</span></span>
+            <span class="dc dc-open">7/18–19<span class="dc-price">$7,700</span></span>
+            <span class="dc dc-open">7/25–26<span class="dc-price">$7,700</span></span>
+            <span class="dc dc-open">9/5–6<span class="dc-price">$7,700</span></span>
+          </div>
+        </div>
+        <div class="card-grid" style="margin-top:14px;">
+          <div>
+            <div class="field-label">成團條件</div>
+            <div class="field-value">7人以上<br><span class="note-sm">可包團（私人小團）</span></div>
+          </div>
+          <div>
+            <div class="field-label">嚮導比例</div>
+            <div class="field-value">–</div>
+          </div>
+          <div>
+            <div class="field-label">體能要求</div>
+            <div class="field-value">–</div>
+          </div>
+          <div>
+            <div class="field-label">保險</div>
+            <div class="field-value">登山險 NT$200萬</div>
+          </div>
+          <div>
+            <div class="field-label">報名網頁</div>
+            <div class="field-value"><a href="https://greathunger.com.tw/activity_view.php?list=11&id=95" target="_blank" class="source-link" style="margin-top:0;font-size:0.82rem;">🔗 greathunger.com.tw/activity_view.php?list=11&id=95</a></div>
+          </div>
+        </div>
+        <hr class="divider">
+        <div class="field-label" style="margin-bottom:6px;">費用包含 / 不包含</div>
+        <div class="include-list">
+          <span class="include-item yes">✓ 台中往返接駁</span><span class="include-item yes">✓ 嚮導</span><span class="include-item yes">✓ 望鄉部落民宿（D0）</span><span class="include-item yes">✓ 排雲山莊住宿（D1）</span><span class="include-item yes">✓ D1早餐、D2晚餐+早餐</span><span class="include-item yes">✓ 登山保險</span><span class="include-item yes">✓ 出發前90分鐘線上課程</span><span class="include-item yes">✓ Permit 不限次抽籤代辦</span><span class="include-item no">✗ 午餐（自備）</span>
+        </div>
+        <hr class="divider">
+        <div class="field-label">退費政策</div>
+        <div class="field-value note-sm">請參閱官網【活動服務條款】</div>
+        <hr class="divider">
+        <div class="field-label">聯絡資訊</div>
+        <div class="contact-grid">
+          <span class="contact-item">📞 <a href="tel:0266058490">(02) 6605-8490</a></span>
+          <span class="contact-item">✉️ <a href="mailto:serve@thegreathungertw.com">serve@thegreathungertw.com</a></span>
+          <span class="contact-item">💬 <a href="https://lin.ee/81Hz8V2" target="_blank">LINE 官方帳號</a></span>
+          <span class="contact-item">📘 <a href="https://www.facebook.com/tghtw/" target="_blank">Facebook</a></span>
+        </div>
+        <div class="contact-hours">🕐 週一至週五 11:00–19:00（13:00–14:00 休息）∙ 台北市中正區忠孝西路一段21號7樓C718</div>
+        <hr class="divider">
+        <div class="field-label">評價 &amp; 口碑</div>
+        <blockquote class="review-quote">「山問攀登有用心在經營的，推。」<cite>— PTT Hiking 板 2025</cite></blockquote>
+        <div class="review-note">一則 Google 評論提及取消手續費政策，業者已公開說明回應。</div>
+      </div>
+    </div>
+
+    <!-- ⑥ 岳野登山社 2D2N 台中 -->
+    <div class="card">
+      <div class="card-header card-header-tc">
+        <div>
+          <div class="card-title">⑥ 岳野登山社《東北亞第一高峰》玉山主峰 — 兩天兩夜</div>
+          <div class="card-provider">岳野登山社（Mountain Field）</div>
+        </div>
+        <div class="card-tags">
+          <span class="tag tag-tc">台中高鐵</span>
+          <span class="tag tag-2d2n">2天2夜</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-grid">
+          <div>
+            <div class="field-label">每人費用</div>
+            <div class="field-value big-price">NT$7,900（台中）</div>
+            <div class="note-sm">台北出發 NT$8,100 ∙ 高雄出發 NT$7,900</div>
+          </div>
+          <div>
+            <div class="field-label">集合地點 / 時間</div>
+            <div class="field-value">🥇 台中高鐵站出口7 20:00（D0）<br>台北車站西3門 18:00<br>高雄高鐵4樓 19:00</div>
+          </div>
+          <div>
+            <div class="field-label">行程概要</div>
+            <div class="field-value">D0: 台中20:00 → 前一晚住宿<br>D1: 塔塔加 → 排雲山莊(3402m) → 過夜<br>D2: 攻頂玉山主峰(3952m) → 各城市返程</div>
+          </div>
+        </div>
+        <div style="margin-top:14px;">
+          <div class="field-label">2026 可報名日期</div>
+          <div class="field-value" style="margin-top:4px;">4月1日起每日開團，天天有梯次可選<br><span class="note-sm">滿7人即送件抽籤；請致電或 LINE 確認最近可出發日</span></div>
+        </div>
+        <div class="card-grid" style="margin-top:14px;">
+          <div>
+            <div class="field-label">成團條件</div>
+            <div class="field-value">滿7人送件抽籤</div>
+          </div>
+          <div>
+            <div class="field-label">嚮導比例</div>
+            <div class="field-value">–</div>
+          </div>
+          <div>
+            <div class="field-label">體能要求</div>
+            <div class="field-value">A+ 中高級難度<br><span class="note-sm">詳細要求洽詢</span></div>
+          </div>
+          <div>
+            <div class="field-label">保險</div>
+            <div class="field-value">登山險 NT$200萬<br>+ 醫療保險</div>
+          </div>
+          <div>
+            <div class="field-label">報名網頁</div>
+            <div class="field-value"><a href="https://www.mountainfield.com.tw/service/42" target="_blank" class="source-link" style="margin-top:0;font-size:0.82rem;">🔗 mountainfield.com.tw/service/42</a></div>
+          </div>
+        </div>
+        <hr class="divider">
+        <div class="field-label" style="margin-bottom:6px;">費用包含 / 不包含</div>
+        <div class="include-list">
+          <span class="include-item yes">✓ 台中/台北/高雄往返交通</span><span class="include-item yes">✓ 嚮導</span><span class="include-item yes">✓ 前一晚住宿（D0）</span><span class="include-item yes">✓ 排雲山莊住宿（D1）</span><span class="include-item yes">✓ 指定早餐+晚餐</span><span class="include-item yes">✓ 帳篷、睡袋</span><span class="include-item yes">✓ 保險</span><span class="include-item yes">✓ 入山入園許可代辦</span><span class="include-item no">✗ 午餐（自備）</span>
+        </div>
+        <hr class="divider">
+        <div class="field-label">退費政策</div>
+        <div class="field-value note-sm">31天以上：全退 ∙ 21–30天：扣60% ∙ 14–20天：扣70% ∙ 7–13天：扣80% ∙ 3天內：不退</div>
+        <hr class="divider">
+        <div class="field-label">聯絡資訊</div>
+        <div class="contact-grid">
+          <span class="contact-item">📞 <a href="tel:0933723696">0933-723-696</a></span>
+          <span class="contact-item">✉️ <a href="mailto:info@mountainfield.com.tw">info@mountainfield.com.tw</a></span>
+          <span class="contact-item">💬 LINE（國內）: @103yzztw</span>
+          <span class="contact-item">💬 LINE（國際）: @022kaztn</span>
+          <span class="contact-item">📘 <a href="https://www.facebook.com/mountainfield177/" target="_blank">Facebook</a></span>
+        </div>
+        <div class="contact-hours">🏠 新北市永和區永寧街115巷9號</div>
+        <hr class="divider">
+        <div class="field-label">評價 &amp; 口碑</div>
+        <blockquote class="review-quote">「行前說明會、行程規劃、慶功宴都很棒，CP 值蠻推薦的。」<cite>— 17jump.tw 部落格 2025</cite></blockquote>
+        <div class="review-note">Dcard 網友票選 5 大登山旅行社之一；玉山口碑佳（2023 運動筆記）。</div>
+      </div>
+    </div>
+
+    <!-- ⑦ 好野旅遊 2D2N 台中接送 -->
+    <div class="card">
+      <div class="card-header card-header-both">
+        <div>
+          <div class="card-title">⑦ 好野旅遊《台灣屋脊》玉山主峰 — 兩天兩夜（台中接送）</div>
+          <div class="card-provider">好野旅遊（Benz Travel Agency）∙ 甲種旅行社</div>
+        </div>
+        <div class="card-tags">
+          <span class="tag tag-both">台北出發（台中烏日接送）</span>
+          <span class="tag tag-2d2n">2天2夜</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-grid">
+          <div>
+            <div class="field-label">每人費用</div>
+            <div class="field-value big-price">NT$7,400–7,800</div>
+            <div class="note-sm">依出發梯次而異；6/1–9日 $7,400，6/11起 $7,800</div>
+          </div>
+          <div>
+            <div class="field-label">集合地點 / 時間</div>
+            <div class="field-value">台北車站（起點）<br>+ 台中烏日高鐵站中途接送上車<br><span class="note-sm">（台中出發者在烏日站上車即可）</span></div>
+          </div>
+          <div>
+            <div class="field-label">行程概要</div>
+            <div class="field-value">D1: 台中烏日上車 → 民宿入住<br>D2: 塔塔加 → 排雲山莊(3402m) → 過夜<br>D3: 攻頂玉山主峰(3952m) → 慶功宴 → 台中</div>
+          </div>
+        </div>
+        <div style="margin-top:14px;">
+          <div class="field-label">2026 可報名日期 <span class="note-sm">（$7,400=6月1–9日；$7,800=6月11日起）</span></div>
+          <div class="date-legend">
+            <span><span class="dl dl-open"></span>可報名</span>
+            <span><span class="dl dl-forming"></span>即將成團</span>
+            <span><span class="dl dl-lottery"></span>已成團待抽籤</span>
+            <span><span class="dl dl-tight"></span>剩1–2位</span>
+          </div>
+          <div class="date-section">
+            <div class="date-month">六月</div>
+            <div class="date-chips">
+              <span class="dc dc-skip">6/2<span class="dc-price">$7,400</span></span><span class="dc dc-skip">6/4<span class="dc-price">$7,400</span></span><span class="dc dc-lottery">6/5<span class="dc-price">$7,400</span></span><span class="dc dc-forming">6/6<span class="dc-price">$7,400</span></span><span class="dc dc-open">6/7<span class="dc-price">$7,400</span></span><span class="dc dc-skip">6/9<span class="dc-price">$7,400</span></span><span class="dc dc-skip">6/11<span class="dc-price">$7,800</span></span><span class="dc dc-forming">6/12<span class="dc-price">$7,800</span></span><span class="dc dc-lottery">6/13<span class="dc-price">$7,800</span></span><span class="dc dc-open">6/14<span class="dc-price">$7,800</span></span><span class="dc dc-skip">6/16<span class="dc-price">$7,800</span></span><span class="dc dc-skip">6/18<span class="dc-price">$7,800</span></span><span class="dc dc-tight">6/19<span class="dc-price">$7,800</span></span><span class="dc dc-lottery">6/20<span class="dc-price">$7,800</span></span><span class="dc dc-forming">6/21<span class="dc-price">$7,800</span></span><span class="dc dc-skip">6/23<span class="dc-price">$7,800</span></span><span class="dc dc-skip">6/25<span class="dc-price">$7,800</span></span><span class="dc dc-lottery">6/26<span class="dc-price">$7,800</span></span><span class="dc dc-lottery">6/27<span class="dc-price">$7,800</span></span><span class="dc dc-skip">6/30<span class="dc-price">$7,800</span></span>
+            </div>
+            <div class="date-month">七月</div>
+            <div class="date-chips">
+              <span class="dc dc-skip">7/2<span class="dc-price">$7,400</span></span><span class="dc dc-forming">7/4<span class="dc-price">$7,400</span></span><span class="dc dc-lottery">7/5<span class="dc-price">$7,400</span></span><span class="dc dc-skip">7/6<span class="dc-price">$7,400</span></span><span class="dc dc-skip">7/7<span class="dc-price">$7,400</span></span><span class="dc dc-skip">7/9<span class="dc-price">$7,400</span></span><span class="dc dc-forming">7/11<span class="dc-price">$7,800</span></span><span class="dc dc-forming">7/12<span class="dc-price">$7,800</span></span><span class="dc dc-skip">7/13<span class="dc-price">$7,800</span></span><span class="dc dc-skip">7/14<span class="dc-price">$7,800</span></span><span class="dc dc-skip">7/16<span class="dc-price">$7,800</span></span><span class="dc dc-lottery">7/18<span class="dc-price">$7,800</span></span><span class="dc dc-tight">7/19<span class="dc-price">$7,800</span></span><span class="dc dc-skip">7/20<span class="dc-price">$7,800</span></span><span class="dc dc-skip">7/21<span class="dc-price">$7,800</span></span><span class="dc dc-skip">7/23<span class="dc-price">$7,800</span></span><span class="dc dc-forming">7/25<span class="dc-price">$7,800</span></span><span class="dc dc-lottery">7/26<span class="dc-price">$7,800</span></span><span class="dc dc-skip">7/27<span class="dc-price">$7,800</span></span><span class="dc dc-skip">7/30<span class="dc-price">$7,800</span></span>
+            </div>
+            <div class="date-month">八月</div>
+            <div class="date-chips">
+              <span class="dc dc-forming">8/2<span class="dc-price">$7,400</span></span><span class="dc dc-skip">8/4<span class="dc-price">$7,400</span></span><span class="dc dc-skip">8/5<span class="dc-price">$7,400</span></span><span class="dc dc-skip">8/6<span class="dc-price">$7,400</span></span><span class="dc dc-open">8/7<span class="dc-price">$7,400</span></span><span class="dc dc-forming">8/9<span class="dc-price">$7,400</span></span><span class="dc dc-skip">8/11<span class="dc-price">$7,800</span></span><span class="dc dc-skip">8/12<span class="dc-price">$7,800</span></span><span class="dc dc-skip">8/13<span class="dc-price">$7,800</span></span><span class="dc dc-open">8/14<span class="dc-price">$7,800</span></span><span class="dc dc-forming">8/16<span class="dc-price">$7,800</span></span><span class="dc dc-skip">8/18<span class="dc-price">$7,800</span></span><span class="dc dc-skip">8/19<span class="dc-price">$7,800</span></span><span class="dc dc-skip">8/20<span class="dc-price">$7,800</span></span><span class="dc dc-forming">8/21<span class="dc-price">$7,800</span></span><span class="dc dc-forming">8/23<span class="dc-price">$7,800</span></span><span class="dc dc-skip">8/25<span class="dc-price">$7,800</span></span><span class="dc dc-skip">8/26<span class="dc-price">$7,800</span></span><span class="dc dc-skip">8/27<span class="dc-price">$7,800</span></span><span class="dc dc-forming">8/30<span class="dc-price">$7,800</span></span>
+            </div>
+            <div class="date-month">九月</div>
+            <div class="date-chips">
+              <span class="dc dc-skip">9/2<span class="dc-price">$7,400</span></span><span class="dc dc-forming">9/4<span class="dc-price">$7,400</span></span><span class="dc dc-lottery">9/5<span class="dc-price">$7,400</span></span><span class="dc dc-forming">9/6<span class="dc-price">$7,400</span></span><span class="dc dc-skip">9/7<span class="dc-price">$7,400</span></span><span class="dc dc-skip">9/9<span class="dc-price">$7,400</span></span><span class="dc dc-forming">9/11<span class="dc-price">$7,800</span></span><span class="dc dc-forming">9/12<span class="dc-price">$7,800</span></span><span class="dc dc-lottery">9/13<span class="dc-price">$7,800</span></span><span class="dc dc-skip">9/14<span class="dc-price">$7,800</span></span><span class="dc dc-skip">9/16<span class="dc-price">$7,800</span></span><span class="dc dc-lottery">9/18<span class="dc-price">$7,800</span></span><span class="dc dc-tight">9/19<span class="dc-price">$7,800</span></span><span class="dc dc-lottery">9/20<span class="dc-price">$7,800</span></span><span class="dc dc-skip">9/21<span class="dc-price">$7,800</span></span><span class="dc dc-skip">9/23<span class="dc-price">$7,800</span></span><span class="dc dc-forming">9/25<span class="dc-price">$7,800</span></span><span class="dc dc-lottery">9/26<span class="dc-price">$7,800</span></span><span class="dc dc-lottery">9/27<span class="dc-price">$7,800</span></span><span class="dc dc-skip">9/30<span class="dc-price">$7,800</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="card-grid" style="margin-top:14px;">
+          <div>
+            <div class="field-label">成團條件</div>
+            <div class="field-value">最少7人、最多30人<br><span class="note-sm">出發前35天截止，30天抽籤</span></div>
+          </div>
+          <div>
+            <div class="field-label">嚮導比例</div>
+            <div class="field-value">1:7（嚮導:學員）</div>
+          </div>
+          <div>
+            <div class="field-label">體能要求</div>
+            <div class="field-value">每週3次60分鐘慢跑<br>近半年10次以上登山記錄</div>
+          </div>
+          <div>
+            <div class="field-label">保險</div>
+            <div class="field-value">旅責險 NT$300萬<br>+ 登山險 NT$200萬</div>
+          </div>
+          <div>
+            <div class="field-label">報名網頁</div>
+            <div class="field-value"><a href="https://www.goodtour.com.tw/travel-detail.aspx?Id=12" target="_blank" class="source-link" style="margin-top:0;font-size:0.82rem;">🔗 goodtour.com.tw/travel-detail.aspx?Id=12</a></div>
+          </div>
+        </div>
+        <hr class="divider">
+        <div class="field-label" style="margin-bottom:6px;">費用包含 / 不包含</div>
+        <div class="include-list">
+          <span class="include-item yes">✓ 來回交通</span><span class="include-item yes">✓ 嚮導+司機</span><span class="include-item yes">✓ 民宿（D1）</span><span class="include-item yes">✓ 排雲山莊住宿（D2）</span><span class="include-item yes">✓ D2+D3 早餐、晚餐</span><span class="include-item yes">✓ 慶功晚宴</span><span class="include-item yes">✓ 睡袋</span><span class="include-item yes">✓ 入山入園許可代辦</span><span class="include-item yes">✓ 雙重保險</span><span class="include-item no">✗ 午餐（自備）</span>
+        </div>
+        <hr class="divider">
+        <div class="field-label">退費政策</div>
+        <div class="field-value note-sm">抽中後訂金 NT$3,500 不退；未抽中可換梯次或退款（扣 NT$300 手續費）</div>
+        <hr class="divider">
+        <div class="field-label">聯絡資訊</div>
+        <div class="contact-grid">
+          <span class="contact-item">📞 <a href="tel:0225318401">02-2531-8401</a></span>
+          <span class="contact-item">✉️ <a href="mailto:goodtour@goodtour.com.tw">goodtour@goodtour.com.tw</a></span>
+          <span class="contact-item">💬 <a href="https://lin.ee/yJuKCUg" target="_blank">LINE 官方帳號</a></span>
+          <span class="contact-item">📘 <a href="https://fb.me/goodtoursharing" target="_blank">Facebook</a></span>
+        </div>
+        <div class="contact-hours">🕐 週一至週五 09:00–18:00（例假日休）∙ 台北市中正區紹興北街35號6F-3</div>
+        <hr class="divider">
+        <div class="field-label">評價 &amp; 口碑</div>
+        <div class="review-ratings">
+          <span class="review-badge review-badge-trip">📊 Tripbaa 4.2 / 5 <span class="review-count">27 則</span></span>
+          <span class="review-badge review-badge-note">💻 Facebook 15,224 追蹤</span>
+        </div>
+        <div class="review-note">同 ① 好野旅遊（同一業者）；第三方評論較少，未見重大負評。</div>
+      </div>
+    </div>
+
+  </div><!-- end cards -->
+
+
+  <!-- NOTES -->
+  <div class="notes-box">
+    <h3>📋 重要注意事項</h3>
+    <ul>
+      <li><strong>排雲山莊抽籤制：</strong>玉山住宿必須事先抽籤，每月1日開放次月申請，各業者代辦但無法保證抽中。未抽中則無法出發。</li>
+      <li><strong>2026 年整修漲價：</strong>排雲山莊 2026 年更換服務廠商，整修完畢後每人餐費與裝備費各漲 NT$200，請向業者確認最新報價。</li>
+      <li><strong>入山入園許可：</strong>玉山國家公園需申請「入山證」與「入園許可」，大多數業者均代辦，但仍需本人提供身分證字號。</li>
+      <li><strong>體能建議：</strong>玉山主峰為百岳難度4星，出發前3個月建議進行有氧訓練與負重練習，至少完成1–2次中級山訓練行程。</li>
+      <li><strong>最佳登山季節：</strong>5–10月（避免梅雨與颱風期）；避開連假以提高抽籤中選機率。</li>
+    </ul>
+  </div>
+
+</div><!-- end container -->
+</body>
+</html>
