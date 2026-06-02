@@ -116,6 +116,7 @@
     }
     .tag-tc { background: #dbeafe; color: var(--taichung); }
     .tag-cy { background: #dcfce7; color: var(--chiayi); }
+    .hl-kaohsiung { color: #c2410c; font-weight: 600; }
     .tag-both { background: #f3e8ff; color: var(--both); }
     .tag-2d1n { background: #fef3c7; color: #92400e; }
     .tag-2d2n { background: #ffe4e6; color: #9f1239; }
@@ -318,6 +319,7 @@
     .dl-lottery { background: #dbeafe; border: 1px solid #93c5fd; }
     .dl-full    { background: #fee2e2; border: 1px solid #fca5a5; }
     .dl-tight   { background: #fce7f3; border: 1px solid #f9a8d4; }
+    .dl-skip    { background: #e2e8f0; border: 1px solid #cbd5e1; }
 
     @media (max-width: 600px) {
       .card-header { flex-direction: column; }
@@ -333,11 +335,6 @@
     <p>僅收錄 <strong>兩天一夜</strong>、<strong>兩天兩夜</strong> 行程 ∙ 優先台中出發，次選嘉義出發 ∙ 更新日期：2026-06-02</p>
   </div>
 
-  <div class="legend">
-    <span class="legend-item"><span class="dot dot-taichung"></span>台中出發（優先）</span>
-    <span class="legend-item"><span class="dot dot-chiayi"></span>嘉義出發（次選）</span>
-    <span class="legend-item"><span class="dot dot-both"></span>台中 + 嘉義皆可</span>
-  </div>
 
   <!-- ===== QUICK COMPARE TABLE ===== -->
   <div class="section-title">快速比較表</div>
@@ -410,7 +407,7 @@
           <td><strong>岳野登山社</strong></td>
           <td><span class="tag tag-2d2n">2天2夜</span></td>
           <td class="price-em">NT$7,900（台中）</td>
-          <td>台中高鐵站出口7 20:00（D0）<br><span class="note-sm">台北車站西3門 18:00 ∙ 高雄高鐵 19:00</span></td>
+          <td>台中高鐵站出口7 20:00（D0）<br><span class="note-sm">台北車站西3門 18:00 ∙ <span class="hl-kaohsiung">高雄高鐵</span> 19:00</span></td>
           <td class="note-sm">D0: 台中 20:00 → 前一晚住宿<br>D1: 塔塔加 → 排雲山莊 → 過夜<br>D2: 攻頂玉山主峰 → 各城市返程</td>
           <td class="meal-cell"><span class="meal-yes">✓ 各天早+晚</span><span class="meal-no">✗ 午餐自備</span></td>
           <td>7人以上</td>
@@ -516,6 +513,7 @@
             <span><span class="dl dl-lottery"></span>已成團待抽籤</span>
             <span><span class="dl dl-tight"></span>剩1–2位</span>
             <span><span class="dl dl-full"></span>額滿</span>
+            <span><span class="dl dl-skip"></span>平日（灰色）</span>
           </div>
           <div class="date-section">
             <div class="date-month">六月</div>
@@ -897,7 +895,7 @@
         <hr class="divider">
         <div class="field-label" style="margin-bottom:6px;">費用包含 / 不包含</div>
         <div class="include-list">
-          <span class="include-item yes">✓ 台中往返接駁</span><span class="include-item yes">✓ 嚮導</span><span class="include-item yes">✓ 望鄉部落民宿（D0）</span><span class="include-item yes">✓ 排雲山莊住宿（D1）</span><span class="include-item yes">✓ D1早餐、D2晚餐+早餐</span><span class="include-item yes">✓ 登山保險</span><span class="include-item yes">✓ 出發前90分鐘線上課程</span><span class="include-item yes">✓ Permit 不限次抽籤代辦</span><span class="include-item no">✗ 午餐（自備）</span>
+          <span class="include-item yes">✓ 台中往返接駁</span><span class="include-item yes">✓ 嚮導</span><span class="include-item yes">✓ 望鄉部落民宿（D0）</span><span class="include-item yes">✓ 排雲山莊住宿（D1）</span><span class="include-item yes">✓ D1早+晚餐、D2早餐</span><span class="include-item yes">✓ 登山保險</span><span class="include-item yes">✓ 出發前90分鐘線上課程</span><span class="include-item yes">✓ Permit 不限次抽籤代辦</span><span class="include-item no">✗ 午餐（自備）</span>
         </div>
         <hr class="divider">
         <div class="field-label">退費政策</div>
@@ -939,7 +937,7 @@
           </div>
           <div>
             <div class="field-label">集合地點 / 時間</div>
-            <div class="field-value">🥇 台中高鐵站出口7 20:00（D0）<br>台北車站西3門 18:00<br>高雄高鐵4樓 19:00</div>
+            <div class="field-value">🥇 台中高鐵站出口7 20:00（D0）<br>台北車站西3門 18:00<br><span class="hl-kaohsiung">高雄高鐵</span>4樓 19:00</div>
           </div>
           <div>
             <div class="field-label">行程概要</div>
@@ -1026,12 +1024,13 @@
           </div>
         </div>
         <div style="margin-top:14px;">
-          <div class="field-label">2026 可報名日期 <span class="note-sm">（$7,400=6月1–9日；$7,800=6月11日起）</span></div>
+          <div class="field-label">2026 可報名日期 <span class="note-sm">（$7,400=各月1–9日；$7,800=各月11日起）</span></div>
           <div class="date-legend">
             <span><span class="dl dl-open"></span>可報名</span>
             <span><span class="dl dl-forming"></span>即將成團</span>
             <span><span class="dl dl-lottery"></span>已成團待抽籤</span>
             <span><span class="dl dl-tight"></span>剩1–2位</span>
+            <span><span class="dl dl-skip"></span>平日（灰色）</span>
           </div>
           <div class="date-section">
             <div class="date-month">六月</div>
