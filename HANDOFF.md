@@ -2,28 +2,23 @@
 
 ## Session Summary
 
-Researched 玉山主峰 tour operators offering 高雄 pickup, documented findings, and initialized project CLAUDE.md.
+Polished the second LINE message (date poll + party size) in `line-message.md` — added tour decision announcement, reformatted dates with Chinese day labels, and tuned tone to be positive and forward-looking.
 
 ## What Was Done
 
-### Tour operator research (tour-operators.md)
-- Deep-research workflow ran 101 agents across 10 operators to find any offering 高雄高鐵 pickup besides 岳野登山社
-- **Result:** No other operator confirmed for 高雄高鐵; closest match is 嘉友登山隊 (高雄火車站前站, NT$5,300)
-- **台中+高雄 dual pickup:** No operator covers both; 米亞桑戶外 is closest (台中機場 + 高雄小港機場)
-- Two leads worth contacting directly: 嘉友登山隊 (ask about 高鐵 stop), Taiwan Adventures (open pickup policy)
-- Findings documented in `tour-operators.md`
-
-### CLAUDE.md initialized
-- Created project CLAUDE.md covering deployment, file roles, HTML architecture, and color-coding system
+- Audited all 16 date ranges (lines 21–36) — confirmed all are correctly Sat–Sun of 2026
+- Reformatted dates to `M/D(六)–M/D(日)` format
+- Added party size question: header instruction + `👥 同行人數（含自己）：＿人` fill-in line
+- Added tour decision announcement block (方案六：岳野登山社) before the date poll, with key details (2天2夜 · 台中／高雄高鐵出發 · NT$7,900/人)
+- Polished overall tone to be excited and rallying; closing line: "讓我們一起站上台灣最頂點！🙌"
+- Author's own response (lines 47–66) already filled in as example/reference
 
 ## Pending / Next Steps
 
-- [ ] Pick final version of the LINE message opening line (手搖 or ig打卡 were the top two candidates)
-- [ ] Contact 嘉友登山隊 — ask if they can add 高雄高鐵 stop
-- [ ] Contact Taiwan Adventures — ask if 高雄高鐵 pickup can be arranged
-- [ ] Contact 米亞桑戶外 — ask if 台中機場 stop can be changed to 台中高鐵
-- [ ] Send LINE messages to group
-- [ ] Once friends respond to date poll, confirm tour and book permit
+- [ ] Send the second LINE message to the group (date poll + party size)
+- [ ] Collect responses and tally available dates
+- [ ] Once date confirmed, contact 岳野登山社 and submit permit application (抽籤制 — submit early)
+- [ ] Contact 嘉友登山隊 — ask if they can add 高雄高鐵 stop (lower priority now that 岳野 is chosen)
 
 ## Key Files
 
@@ -31,7 +26,7 @@ Researched 玉山主峰 tour operators offering 高雄 pickup, documented findin
 |------|---------|
 | `index.html` | Main comparison page (published) |
 | `tour-operators.md` | Tour operator research — pickup points, pricing, leads |
-| `line-message.md` | LINE group welcome + date poll messages |
+| `line-message.md` | LINE group messages — welcome + date/party-size poll |
 | `CLAUDE.md` | Project-specific Claude Code instructions |
 | `user-input.md` | Source URLs (untracked, do not commit) |
 
