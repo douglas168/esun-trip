@@ -38,6 +38,9 @@ Built and polished a 玉山主峰登山團比較 HTML page, published it to GitH
 |------|---------|
 | `index.html` | Main comparison page (published) |
 | `line-message.md` | LINE group welcome + date poll messages |
+| `tour-operators.md` | Tour operator source data |
+| `CLAUDE.md` | Project-specific Claude Code instructions |
+| `.gitignore` | Git ignore rules |
 | `user-input.md` | Source URLs (untracked, do not commit) |
 
 ## Repo
