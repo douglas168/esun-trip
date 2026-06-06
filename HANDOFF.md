@@ -1,32 +1,38 @@
-# HANDOFF — 2026-06-03
+# HANDOFF — 2026-06-06
 
 ## Session Summary
 
-Polished the second LINE message (date poll + party size) in `line-message.md` — added tour decision announcement, reformatted dates with Chinese day labels, and tuned tone to be positive and forward-looking.
+Tallied date availability from all 5 group members, drafted LINE messages announcing the result and confirming 8/29 as the target date, and drafted an inquiry message to send to 岳野登山社.
 
 ## What Was Done
 
-- Audited all 16 date ranges (lines 21–36) — confirmed all are correctly Sat–Sun of 2026
-- Reformatted dates to `M/D(六)–M/D(日)` format
-- Added party size question: header instruction + `👥 同行人數（含自己）：＿人` fill-in line
-- Added tour decision announcement block (方案六：岳野登山社) before the date poll, with key details (2天2夜 · 台中／高雄高鐵出發 · NT$7,900/人)
-- Polished overall tone to be excited and rallying; closing line: "讓我們一起站上台灣最頂點！🙌"
-- Author's own response (lines 47–66) already filled in as example/reference
+- Tallied `dates-submitted.md` — 5 respondents (Ivy×2, Stanley×3, Paul×1, Zeff×1, DK×1 = 8 people total)
+- Verified tally twice; 8/29 is the only date all 8 people can make
+- Drafted and saved result announcement to `line-message.md` (LINE message to the group):
+  - Per-person breakdown for top 2 dates (8/29 全員, 8/1 6人)
+  - Summary of remaining dates by headcount
+  - Closing: confirms 8/29, tour details (岳野登山社, NT$7,900, 成團門檻滿7人), asks group to confirm
+- Drafted and saved inquiry message to `line-message.md` (LINE message to 岳野登山社):
+  - Group of 8, target date 8/29(六)
+  - 2 from 高雄高鐵, 6 from 台中高鐵
+  - 4 questions: required info, payment/deposit, permit lottery process, other prep items
+- Updated `CLAUDE.md` files table to include `dates-submitted.md`
 
 ## Pending / Next Steps
 
-- [ ] Send the second LINE message to the group (date poll + party size)
-- [ ] Collect responses and tally available dates
-- [ ] Once date confirmed, contact 岳野登山社 and submit permit application (抽籤制 — submit early)
-- [ ] Contact 嘉友登山隊 — ask if they can add 高雄高鐵 stop (lower priority now that 岳野 is chosen)
+- [ ] Send result announcement to LINE group — confirm 8/29 with group
+- [ ] Once group confirms, send inquiry message to 岳野登山社 via LINE/phone
+- [ ] Collect registration info from all 8 members and submit to 岳野登山社
+- [ ] Monitor permit lottery result
 
 ## Key Files
 
 | File | Purpose |
 |------|---------|
 | `index.html` | Main comparison page (published) |
-| `tour-operators.md` | Tour operator research — pickup points, pricing, leads |
-| `line-message.md` | LINE group messages — welcome + date/party-size poll |
+| `line-message.md` | All LINE messages — group announcement + 岳野登山社 inquiry |
+| `dates-submitted.md` | Raw date availability responses from all 5 respondents |
+| `tour-operators.md` | Tour operator research |
 | `CLAUDE.md` | Project-specific Claude Code instructions |
 | `user-input.md` | Source URLs (untracked, do not commit) |
 
