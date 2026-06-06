@@ -15,6 +15,7 @@ A single-page static site comparing 玉山主峰 (Jade Mountain) guided tour ope
 |------|---------|
 | `index.html` | Main comparison page (all CSS and JS inline) |
 | `line-message.md` | LINE group messages — welcome + date availability poll |
+| `dates-submitted.md` | Submitted date availability responses from group members |
 | `user-input.md` | Source URLs — **untracked, do not commit** |
 
 ## Deployment
