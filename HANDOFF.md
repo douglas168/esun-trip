@@ -1,39 +1,35 @@
-# HANDOFF — 2026-06-06
+# HANDOFF — 2026-06-11
 
 ## Session Summary
 
-Tallied date availability from all 5 group members, drafted LINE messages announcing the result and confirming 8/29 as the target date, and drafted an inquiry message to send to 岳野登山社.
+Collected registration data from group members, created a CSV tracker, and drafted a follow-up LINE reminder message for the remaining members to submit their info by Friday 6/13.
 
 ## What Was Done
 
-- Tallied `dates-submitted.md` — 5 respondents (Ivy×2, Stanley×3, Paul×1, Zeff×1, DK×1 = 8 people total)
-- Verified tally twice; 8/29 is the only date all 8 people can make
-- Drafted and saved result announcement to `line-message.md` (LINE message to the group):
-  - Per-person breakdown for top 2 dates (8/29 全員, 8/1 6人)
-  - Summary of remaining dates by headcount
-  - Closing: confirms 8/29, tour details (岳野登山社, NT$7,900, 成團門檻滿7人), asks group to confirm
-- Drafted and saved inquiry message to `line-message.md` (LINE message to 岳野登山社):
-  - Group of 8, target date 8/29(六)
-  - 2 from 高雄高鐵, 6 from 台中高鐵
-  - 4 questions: required info, payment/deposit, permit lottery process, other prep items
-- Updated `CLAUDE.md` files table to include `dates-submitted.md`
+- **LINE reminder message** (`line-message.md`): Added new follow-up message reminding everyone to submit registration fields by **本週五 6/13**, with option to submit directly to 岳野登山社 if uncomfortable sharing with DK. Includes link to https://www.mountainfield.com.tw/service/42 and QR code placeholder.
+- **`registration.csv`**: Created to track all participant registration fields. Pre-populated with DK's data (from `list-dk.md`) and Stanley's 5 family members (from `list-stanley.md`). 6 rows total — verified accurate.
+- **`CLAUDE.md`**: Updated Files table to include `tour-operators.md`, `list-dk.md`, `list-stanley.md`, `registration.csv`.
 
 ## Pending / Next Steps
 
-- [ ] Send result announcement to LINE group — confirm 8/29 with group
-- [ ] Once group confirms, send inquiry message to 岳野登山社 via LINE/phone
-- [ ] Collect registration info from all 8 members and submit to 岳野登山社
-- [ ] Monitor permit lottery result
+- [ ] Collect remaining registrations from Paul, Zeff, Ivy, and others — deadline 6/13 (Friday)
+- [ ] Add each response as a row in `registration.csv`
+- [ ] Submit consolidated data to 岳野登山社
+- [ ] **QR code**: `line-message.md` has a `[岳野登山社 LINE QR Code]` placeholder — paste the actual image (`岳野登山社有限公司-LINE.jpg`) when sending in LINE
+- [ ] **⚠️ PII / gitignore**: `list-dk.md`, `list-stanley.md`, `registration.csv` contain national IDs, addresses, phone numbers. This is a **public GitHub repo** — consider adding them to `.gitignore` like `user-input.md`
+- [ ] Monitor permit lottery result after submission
 
 ## Key Files
 
 | File | Purpose |
 |------|---------|
-| `index.html` | Main comparison page (published) |
-| `line-message.md` | All LINE messages — group announcement + 岳野登山社 inquiry |
-| `dates-submitted.md` | Raw date availability responses from all 5 respondents |
-| `tour-operators.md` | Tour operator research |
+| `line-message.md` | All LINE messages — new reminder at lines 199–224 |
+| `registration.csv` | Participant registration data (6 rows so far) |
+| `list-dk.md` | DK's registration info (untracked) |
+| `list-stanley.md` | Stanley's family registration info — 5 members (untracked) |
+| `岳野登山社有限公司-LINE.jpg` | 岳野 LINE QR code image (untracked) |
 | `CLAUDE.md` | Project-specific Claude Code instructions |
+| `dates-submitted.md` | Raw date availability responses |
 | `user-input.md` | Source URLs (untracked, do not commit) |
 
 ## Repo
