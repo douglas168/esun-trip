@@ -18,6 +18,7 @@ A single-page static site comparing 玉山主峰 (Jade Mountain) guided tour ope
 | `dates-submitted.md` | Submitted date availability responses from group members |
 | `tour-operators.md` | Tour operator research data |
 | `list-dk.md` | DK's personal registration info |
+| `list-paul.md` | Paul's registration info |
 | `list-stanley.md` | Stanley's LINE chat log / group messages |
 | `registration.csv` | Consolidated participant registration data |
 | `user-input.md` | Source URLs — **untracked, do not commit** |
