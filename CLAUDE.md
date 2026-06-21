@@ -22,6 +22,7 @@ A single-page static site comparing 玉山主峰 (Jade Mountain) guided tour ope
 | `list-stanley.md` | Stanley's LINE chat log / group messages |
 | `registration.csv` | Consolidated participant registration data |
 | `user-input.md` | Source URLs — **untracked, do not commit** |
+| `岳野登山社有限公司-LINE.jpg` | 岳野登山社 LINE screenshot — **untracked, do not commit** |
 
 ## Deployment
 
